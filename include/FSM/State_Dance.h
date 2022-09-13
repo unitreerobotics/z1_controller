@@ -14,7 +14,6 @@ public:
     int checkChange(int cmd);
 private:
     bool _freeBottom = false;
-    // ArmFSMStateName _nextState;
     void _setTraj(){}
 };
 

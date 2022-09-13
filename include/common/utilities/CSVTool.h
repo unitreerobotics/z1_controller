@@ -6,7 +6,6 @@
     only suitable for small .csv file.
     for large .csv, try <https://github.com/ben-strasser/fast-cpp-csv-parser> (read only)
  */
-
 #include <string>
 #include <vector>
 #include <map>
@@ -61,6 +60,7 @@ public:
     void readFile();
     void saveFile();
 
+    bool _hasFile;
 private:
     std::string _fileName;
     std::fstream _ioStream;
@@ -139,10 +139,13 @@ inline CSVTool::CSVTool(std::string fileName, FileType type, int precision)
 
         if(!_ioStream.is_open()){
             std::cout << "[ERROR] CSVTool open file: " << fileName << " failed!" << std::endl;
-            exit(-1);
+            // exit(-1);
+            _hasFile = false;
+        }else{
+            readFile();
+            _hasFile = true;
         }
 
-        readFile();
     }
     else if(type == FileType::CLEAR_DUMP){
         _ioStream.open(_fileName, std::fstream::out);
@@ -154,6 +157,7 @@ inline void CSVTool::readFile(){
     if(!_ioStream.is_open()){
         // _ioStream.open(_fileName, std::fstream::ate | std::fstream::in | std::fstream::out);
         std::cout << "[ERROR] CSVTool::readFile, file: " << _fileName << " has not been opened!" << std::endl;
+        return;
     }
 
     _lines.clear();
@@ -177,7 +181,7 @@ inline void CSVTool::readFile(){
 
 inline bool CSVTool::getLine(std::string label, std::vector<double> &values){
     if(_labels.count(label) == 0){
-        std::cout << "[ERROR] No such label: " << label << std::endl;
+        // std::cout << "[ERROR] No such label: " << label << std::endl;
         return false;
     }else{
         _lines.at(_labels[label])->getValues(values);

@@ -5,6 +5,7 @@
 #include <trajectory/Trajectory.h>
 #include <string>
 #include "control/CtrlComponents.h"
+#include "trajectory/SCurve.h"
 
 class JointSpaceTraj : public Trajectory{
 public:
@@ -13,10 +14,11 @@ public:
     JointSpaceTraj(ArmDynKineModel *armModel, CSVTool *csvState);
     ~JointSpaceTraj(){}
 
+    void setGripper(double startQ, double endQ);
     bool getJointCmd(Vec6 &q, Vec6 &qd);
     bool getJointCmd(Vec6 &q, Vec6 &qd, double &gripperQ, double &gripperQd);
     void setJointTraj(Vec6 startQ, Vec6 endQ, double speed);
-    void setJointTraj(Vec6 startQ, std::string endName, double speed);
+    bool setJointTraj(Vec6 startQ, std::string endName, double speed);
     void setJointTraj(std::string startName, std::string endName, double speed);
 
     void setJointTraj(Vec6 startQ, Vec6 middleQ, double middleS, Vec6 endQ, double speed);
@@ -33,10 +35,6 @@ private:
     double _pathTimeTemp;       // path total time
     double _s, _sDot;       // [0, 1]
     double _a3, _a4, _a5;   // parameters of path
-    // double _speedFactor;    // [0, 1]
-    std::vector<double> _jointMaxQ;
-    std::vector<double> _jointMinQ;
-    std::vector<double> _jointMaxSpeed;
 
     int _trajOrder;     // The order of trajectory curve
     std::vector<Vec6> _curveParam;

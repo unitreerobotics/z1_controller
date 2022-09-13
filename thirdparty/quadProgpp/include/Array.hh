@@ -1785,7 +1785,7 @@ void svd(const Matrix<T>& A, Matrix<T>& U, Vector<T>& W, Matrix<T>& V)
       for (unsigned int its = 0; its < max_its; its++)
 	{
 	  flag = true;
-	  for (l = k; l >= 0; l--) // FIXME: in NR it was l >= 1 but there subscripts start from one
+	  for (l = k; l >= 0; l--)
 	    { // Test for splitting
 	      nm = l - 1; // Note that rV[0] is always zero
 	      if ((T)(fabs(rv1[l]) + anorm) == anorm)

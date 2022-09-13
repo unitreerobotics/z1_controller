@@ -31,5 +31,4 @@ private:
     CartesionSpaceTraj *_cartesionTraj;
     bool _timeReached, _taskReached, _pastTaskReached, _finalReached;
 };
-
 #endif  // CARTESIAN_H

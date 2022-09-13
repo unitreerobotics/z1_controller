@@ -24,7 +24,7 @@ public:
     virtual void run() = 0;
     virtual void exit() = 0;
     virtual int checkChange(int cmd) {return (int)ArmFSMStateName::INVALID;}
-
+    
 protected:
     void _armCtrl();
     void _tauDynForward();
@@ -33,20 +33,21 @@ protected:
     bool _collisionTest();
     void _jointPosProtect();
     void _jointSpeedProtect();
-#ifdef UNITREE_GRIPPER
+    void _stateUpdate();
+    
     void _gripperCmd();
     void _gripperCtrl();
     double _gripperPos;
     double _gripperW;
     double _gripperTau;
-    double _gripperPosStep;
+    double _gripperPosStep;//keyboard
     double _gripperTauStep;
 
     double _gripperLinearFriction;
     double _gripperCoulombFriction;
     static double _gripperCoulombDirection;
     double _gripperFriction;
-#endif
+
     CtrlComponents *_ctrlComp;
     ArmFSMStateName _nextStateName;
 

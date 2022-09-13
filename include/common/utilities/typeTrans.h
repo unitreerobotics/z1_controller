@@ -5,21 +5,6 @@
 #include <vector>
 #include <Eigen/Dense>
 
-/* Tools */
-// const std::string convert(const long l, const size_t n){
-// 	long val=l;
-// 	std::stringstream ss;
-// 	do
-// 	{
-// 		ss<<(val%n);
-// 		val/=n;
-// 	}while(val!=0);
-// 	std::string s=ss.str();
-// 	std::reverse(s.begin(),s.end());
-// 	return s;
-// }
-
-
 namespace typeTrans{
 
 inline void addValue(std::vector<double> &vec, double value){

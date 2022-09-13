@@ -16,24 +16,11 @@ public:
     std::vector<double> kp;
     std::vector<double> kd;
 
+    std::vector<std::vector<double>> q_cmd_data;
+    std::vector<std::vector<double>> dq_cmd_data;
+    std::vector<std::vector<double>> tau_cmd_data;
 
-    LowlevelCmd(){
-#ifndef UNITREE_GRIPPER
-        q.resize(_dof);
-        dq.resize(_dof);
-        tau.resize(_dof);
-        kp.resize(_dof);
-        kd.resize(_dof);
-#endif
-
-#ifdef UNITREE_GRIPPER
-        q.resize(_dof+1);
-        dq.resize(_dof+1);
-        tau.resize(_dof+1);
-        kp.resize(_dof+1);
-        kd.resize(_dof+1);
-#endif
-    }
+    LowlevelCmd();
     ~LowlevelCmd(){}
 
     void setZeroDq();
@@ -51,10 +38,15 @@ public:
     void setGripperGain(float KP, float KW);
     void setGripperZeroGain();
     void setGripperQ(double qInput);
+    double getGripperQ();
     void setGripperQd(double qdInput);
+    double getGripperQd();
     void setGripperTau(double tauInput);
+    double getGripperTau();
     Vec6 getQ();
     Vec6 getQd();
+
+    void resizeGripper();
 };
 
 

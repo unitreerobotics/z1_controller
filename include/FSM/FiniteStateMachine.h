@@ -5,6 +5,7 @@
 #include "FSM/BaseState.h"
 #include "unitree_arm_sdk/cmdPanel.h"
 #include "unitree_arm_sdk/loop.h"
+#include "unitree_arm_sdk/keyboard.h"
 
 enum class FSMRunMode{
     NORMAL,
@@ -25,7 +26,6 @@ public:
 
 private:
     void _run();
-    static void* _staticRun(void* obj);
     std::vector<BaseState*> _states;
 
     FSMRunMode _mode;

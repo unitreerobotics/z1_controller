@@ -8,6 +8,7 @@ public:
     State_BackToStart(CtrlComponents *ctrlComp);
 private:
     void _setTraj();
+    void _setTrajSDK(){}
 };
 
 #endif  // STATE_BACKTOSTART_H

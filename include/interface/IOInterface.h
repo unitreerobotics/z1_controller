@@ -4,9 +4,9 @@
 #include "message/LowlevelCmd.h"
 #include "message/LowlevelState.h"
 #include "unitree_arm_sdk/cmdPanel.h"
-#include "model/ArmReal.h"
 #include "unitree_arm_sdk/keyboard.h"
 #include <string>
+#include "common/math/robotics.h"
 
 class IOInterface{
 public:
@@ -19,17 +19,16 @@ public:
     std::string getString(std::string slogan){return _cmdPanel->getString(slogan);}
     std::vector<double> stringToArray(std::string slogan){return _cmdPanel->stringToArray(slogan);}
     std::vector<std::vector<double> > stringToMatrix(std::string slogan){return _cmdPanel->stringToMatrix(slogan);}
-    virtual bool calibration(){};
+    virtual bool calibration(){return false;};
 
-#ifdef CTRL_BY_SDK
     SendCmd getSendCmd(){return _cmdPanel->getSendCmd();};
     void getRecvState(RecvState recvState){ _cmdPanel->getRecvState(recvState);};
-#endif
 
+    bool isDisConnect = false;// udp disconnection
+    bool _isDisConnect[7];// joint(motor) disconnection
 protected:
+    uint16_t _isDisConnectCnt[7];
     CmdPanel *_cmdPanel;
-    
-
 };
 
 #endif  //IOINTERFACE_H

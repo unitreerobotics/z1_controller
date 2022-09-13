@@ -12,13 +12,13 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    void quadprogArea();
     double _posSpeed;
     double _oriSpeed;
     Vec3 _omega;
     Vec3 _velocity;
     Vec6 _twist;
     HomoMat _endHomoGoal, _endHomoGoalPast;
+    Vec6 _endPostureGoal, _endPosturePast, _endPostureDelta;
     HomoMat _endHomoFeedback;
     Vec6 _Pdes;
     Vec6 _Pfd;

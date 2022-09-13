@@ -13,11 +13,12 @@ public:
     ~State_Trajectory();
     void enter();
     void run();
-    virtual void exit();
-    virtual int checkChange(int cmd);
+    void exit();
+    int checkChange(int cmd);
 protected:
     // EndHomoTraj *_traj;
     virtual void _setTraj();
+    virtual void _setTrajSdk();
     TrajectoryManager *_traj;
     HomoMat _goalHomo;
     Vec6 _goalTwist;
@@ -31,6 +32,10 @@ protected:
     std::vector<EndLineTraj*> _lineTraj;
 
     long long startTime;
+    static std::vector<TrajCmd> _trajCmd;
+    Vec6 _posture[2];
+
+    static bool _isTrajFSM;
 };
 
 #endif  // CARTESIANPATH_H

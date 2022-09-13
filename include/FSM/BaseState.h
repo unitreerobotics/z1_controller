@@ -2,6 +2,7 @@
 #define BASESTATE_H
 
 #include <string>
+#include "common/enumClass.h"
 
 class BaseState{
 public:
@@ -25,6 +26,7 @@ public:
 protected:
     int _stateNameEnum;
     std::string _stateNameString;
+    Control _ctrl;
 };
 
 #endif

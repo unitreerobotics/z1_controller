@@ -13,6 +13,7 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
+    bool _setCorrectly;
     double _costTime;
     HomoMat _goalHomo;
     JointSpaceTraj *_jointTraj;

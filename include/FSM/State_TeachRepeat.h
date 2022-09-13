@@ -14,6 +14,7 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
+    bool _setCorrectly;
     JointSpaceTraj *_toStartTraj;
     bool _reachedStart = false;
     bool _finishedRepeat = false;

@@ -11,25 +11,23 @@
 
 class IOROS : public IOInterface{
 public:
-    IOROS(CmdPanel *cmdPanel);
+    IOROS(CmdPanel *cmdPanel, bool hasGripper);
     ~IOROS();
     bool sendRecv(const LowlevelCmd *cmd, LowlevelState *state);
-    // void setGripper(double position, double force){};
-    // void getGripper(double &position, double &force){};
 private:
+    bool _hasGripper;
     ros::NodeHandle _nm;
-#ifndef UNITREE_GRIPPER
-    ros::Subscriber _servo_sub[6];
-    ros::Publisher _servo_pub[6];
-    unitree_legged_msgs::MotorState _joint_state[6];
-    unitree_legged_msgs::MotorCmd _joint_cmd[6];
-#endif
-#ifdef UNITREE_GRIPPER
+// #ifdef UNITREE_GRIPPER
     ros::Subscriber _servo_sub[7];
     ros::Publisher _servo_pub[7];
     unitree_legged_msgs::MotorState _joint_state[7];
     unitree_legged_msgs::MotorCmd _joint_cmd[7];
-#endif
+// #else
+//     ros::Subscriber _servo_sub[6];
+//     ros::Publisher _servo_pub[6];
+//     unitree_legged_msgs::MotorState _joint_state[6];
+//     unitree_legged_msgs::MotorCmd _joint_cmd[6];
+// #endif
     void _sendCmd(const LowlevelCmd *cmd);
     void _recvState(LowlevelState *state);
     void _initRecv();
@@ -42,7 +40,6 @@ private:
     void _joint04Callback(const unitree_legged_msgs::MotorState& msg);
     void _joint05Callback(const unitree_legged_msgs::MotorState& msg);
     void _gripperCallback(const unitree_legged_msgs::MotorState& msg);
-
 };
 
 #endif  // IOROS_H

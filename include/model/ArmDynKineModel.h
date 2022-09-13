@@ -1,3 +1,4 @@
+
 #ifndef ARMDYNCKINEMODEL_H
 #define ARMDYNCKINEMODEL_H
 
@@ -25,7 +26,7 @@ public:
 
     void solveQP(Vec6 twist, Vec6 pastAngle, Vec6 &result, double dt, bool setJ0QdZero, bool setQdZero);
     bool invKinematics(HomoMat gDes, Vec6 pastAngle, Vec6 &result, bool checkInWorkSpace = false);
-    HomoMat forwardKinematics(Vec6 q, int index=6);   // index from 0 to 5, used for fourth version
+    HomoMat forwardKinematics(Vec6 q, int index=6, bool isExp = false);   // index from 0 to 5, used for fourth version
     bool _useIKSolver = false;
 
 protected:
@@ -111,4 +112,13 @@ public:
 };
 
 
-#endif  // ARMDYNCKINEMODEL_H
+class Z1PlusDynKineModel : public ArmDynKineModel{
+public:
+    Z1PlusDynKineModel(Vec3 endPosLocal = Vec3::Zero(), 
+        double endEffectorMass = 0.0,
+        Vec3 endEffectorCom = Vec3::Zero(), 
+        Mat3 endEffectorInertia = Mat3::Zero());
+    ~Z1PlusDynKineModel(){}
+};
+
+#endif

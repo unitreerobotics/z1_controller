@@ -12,7 +12,8 @@ public:
 
     void setEndLineTraj(HomoMat startHomo, Vec3 deltaPos, Vec3 deltaOri, double maxMovingSpeed, double maxTurningSpeed);
     void setEndLineTraj(std::string stateName, Vec3 deltaPos, Vec3 deltaOri, double maxMovingSpeed, double maxTurningSpeed);
-
+    void setEndLineTraj(Vec6 startP, Vec6 endP, double maxMovingSpeed, double maxTurningSpeed);
+    void setEndLineTraj(std::string startName, std::string endName, double maxMovingSpeed, double maxTurningSpeed);
 private:
     bool _getEndTraj(HomoMat &homo, Vec6 &twist);
 
@@ -22,9 +23,8 @@ private:
     Vec3 _currentDistance, _currentAngle;
     Vec3 _currentVelocity, _currentOmega;
        
-
     SCurve _posCurve;
     SCurve _oriCurve;
 };
 
-#endif  // ENDLINETRAJ_H
+#endif

@@ -2,7 +2,7 @@
 #define MATHTOOLS_H
 
 #include <iostream>
-// #include "common/mathTypes.h"
+#include "common/math/mathTypes.h"
 
 // template<typename T1, typename T2>
 // inline T1 max(const T1 a, const T2 b){
@@ -60,14 +60,7 @@ inline double angleError(double first, double second, TurnDirection direction = 
     double firstMod = fmod(first, 2.0*M_PI);
     double secondMod = fmod(second, 2.0*M_PI);
 
-    if(direction == TurnDirection::NOMATTER){
-        if(fabs(firstMod - secondMod) > fabs(secondMod - firstMod)){
-            return secondMod - firstMod;
-        }else{
-            return firstMod - secondMod;
-        }
-    }
-    else if(direction == TurnDirection::POSITIVE){
+    if(direction == TurnDirection::POSITIVE){
         if(firstMod - secondMod < 0.0){
             return 2*M_PI + firstMod - secondMod;
         }else{
@@ -80,6 +73,12 @@ inline double angleError(double first, double second, TurnDirection direction = 
         }else{
             return firstMod - secondMod;
         }
+    }else{//no matter
+        if(fabs(firstMod - secondMod) > fabs(secondMod - firstMod)){
+            return secondMod - firstMod;
+        }else{
+            return firstMod - secondMod;
+        }        
     }
 }
 
@@ -478,5 +477,4 @@ private:
     double _zoomFactor;
     std::string _valueName;
 };
-
-#endif  // MATHTOOLS_H
+#endif

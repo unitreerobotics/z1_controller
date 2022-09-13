@@ -338,7 +338,6 @@ l2a:/* Step 2a: determine step direction */
   if (t >= inf)
   {
     /* QPP is infeasible */
-    // FIXME: unbounded to raise
     return inf;
   }
   /* case (ii): step in dual space */

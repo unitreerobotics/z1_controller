@@ -17,30 +17,12 @@ struct UserValue{
     double gripperPos;
 
     void setData(std::vector<double> rawData){
-#ifdef CTRL_BY_SDK
         if(rawData.size() != 7){
             std::cout << "[ERROR] UserValue::setData, the size of rawDate is " << rawData.size() << " but not 7" << std::endl;
         }
         gripperPos = rawData.at(6);
         rawData = cutVector(rawData, 0, 6);
         moveAxis = typeTrans::getValue(rawData, moveAxis);
-#endif
-#ifdef CTRL_BY_KEYBOARD
-        if(rawData.size() != 7){
-            std::cout << "[ERROR] UserValue::setData, the size of rawDate is " << rawData.size() << " but not 7" << std::endl;
-        }
-        gripperPos = rawData.at(6);
-        rawData = cutVector(rawData, 0, 6);
-        moveAxis = typeTrans::getValue(rawData, moveAxis);
-#endif
-#ifdef CTRL_BY_JOYSTICK
-        if(rawData.size() != 7){
-            std::cout << "[ERROR] UserValue::setData, the size of rawDate is " << rawData.size() << " but not 7" << std::endl;
-        }
-        gripperPos = rawData.at(6);
-        rawData = cutVector(rawData, 0, 6);
-        moveAxis = typeTrans::getValue(rawData, moveAxis);
-#endif
     }
 
     UserValue(){

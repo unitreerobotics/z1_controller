@@ -22,6 +22,9 @@ public:
     void emptyTraj();
     Vec6 getStartQ();
     Vec6 getEndQ();
+    Vec6 getEndPosture();
+    double getEndGripperQ();
+    double getStartGripperQ();
     HomoMat getEndHomo();
     // bool checkTrajectoryContinuous();
 private:
