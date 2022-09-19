@@ -31,6 +31,7 @@ private:
     bool _checkJointAngleValid(const double &q, int jointOrder);
     void _generateA345();
 
+    SCurve _jointCurve;
     int _jointNum;
     double _pathTimeTemp;       // path total time
     double _s, _sDot;       // [0, 1]
@@ -38,6 +39,7 @@ private:
 
     int _trajOrder;     // The order of trajectory curve
     std::vector<Vec6> _curveParam;
+
 };
 
 #endif  // JOINTSPACETRAJ_H

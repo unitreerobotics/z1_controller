@@ -110,7 +110,7 @@ int main(int argc, char **argv){
         
         cmdPanel = new Keyboard(events, emptyAction);
     }else if(ctrlComp->ctrl == Control::_JOYSTICK){
-        events.push_back(new StateAction("r12", (int)ArmFSMStateName::PASSIVE));
+        events.push_back(new StateAction("r2x", (int)ArmFSMStateName::TRAJECTORY));
         events.push_back(new StateAction("l12", (int)ArmFSMStateName::PASSIVE));
         events.push_back(new StateAction("r2", (int)ArmFSMStateName::JOINTCTRL));
         events.push_back(new StateAction("r1", (int)ArmFSMStateName::CARTESIAN));

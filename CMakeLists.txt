@@ -84,6 +84,7 @@ link_directories(lib)
 # ----------------------add executable----------------------
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../build)                # EXECUTABLE:CMAKE_RUNTIME_OUTPUT_DIRECTORY
 add_executable(z1_ctrl main.cpp)
+# add_dependencies(z1_ctrl  Z1_${COMMUNICATION}_Linux64)
 target_link_libraries(z1_ctrl ${catkin_LIBRARIES} libUnitree_motor_SDK_Linux64_EPOLL.so libZ1_${COMMUNICATION}_Linux64.so)
 
 # set(EXECUTABLE_OUTPUT_PATH /home/$ENV{USER}/)

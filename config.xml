@@ -1,5 +1,5 @@
 <configurartion>
-    <control set="1">
+    <control set="2">
         <option1>keyboard</option1>
         <option2>sdk</option2>
         <option3>joystick</option3> <!-- default aliengo_joystick -->
