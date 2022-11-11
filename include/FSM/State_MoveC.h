@@ -2,7 +2,7 @@
 #define MOVEC_H
 
 #include "FSM/FSMState.h"
-#include "trajectory/CartesionSpaceTraj.h"
+#include "trajectory/EndCircleTraj.h"
 
 class State_MoveC : public FSMState{
 public:
@@ -13,22 +13,10 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    void quadprogArea();
-    double _posSpeed;
-    double _oriSpeed;
-    Vec3 _omega;
-    Vec3 _velocity;
-    Vec6 _twist;
-    Vec6 _pastPosture, _endPosture, _middlePostureGoal, _endPostureGoal, _endTwist;
-    HomoMat _endHomoFeedback;
-    Vec6 _Pdes;
-    Vec6 _Pfd;
-    Vec6 _Pkp;
-    Vec6 _endPostureError;
-
-    // 轨迹相关变量
-    CartesionSpaceTraj *_cartesionTraj;
-    bool _reached, _timeReached, _taskReached, _pastTaskReached;
+    double _speed;
+    std::vector<Vec6>  _postures;
+    EndCircleTraj *_circleTraj;
+    bool _timeReached, _taskReached, _pastTaskReached, _finalReached;
 };
 
 #endif  // CARTESIAN_H

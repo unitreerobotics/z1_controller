@@ -5,15 +5,9 @@
 #include <iostream>
 #include <unistd.h>
 #include "control/CtrlComponents.h"
-#include "message/LowlevelCmd.h"
-#include "message/LowlevelState.h"
-#include "common/enumClass.h"
 #include "common/math/mathTools.h"
-#include "common/math/mathTypes.h"
-#include "unitree_arm_sdk/timer.h"
-#include "model/ArmDynKineModel.h"
-
-#include "FSM/FiniteStateMachine.h"
+#include "common/utilities/timer.h"
+#include "FSM/BaseState.h"
 
 class FSMState : public BaseState{
 public:
@@ -24,55 +18,23 @@ public:
     virtual void run() = 0;
     virtual void exit() = 0;
     virtual int checkChange(int cmd) {return (int)ArmFSMStateName::INVALID;}
+    bool _collisionTest();
     
 protected:
     void _armCtrl();
-    void _tauDynForward();
-    void _tauFriction();
-    void _qdFeedBack();
-    bool _collisionTest();
-    void _jointPosProtect();
-    void _jointSpeedProtect();
-    void _stateUpdate();
-    
-    void _gripperCmd();
-    void _gripperCtrl();
-    double _gripperPos;
-    double _gripperW;
-    double _gripperTau;
-    double _gripperPosStep;//keyboard
-    double _gripperTauStep;
+    void _recordData();
+    Vec6 _postureToVec6(Posture posture);
 
-    double _gripperLinearFriction;
-    double _gripperCoulombFriction;
-    static double _gripperCoulombDirection;
-    double _gripperFriction;
-
-    CtrlComponents *_ctrlComp;
-    ArmFSMStateName _nextStateName;
-
-    IOInterface *_ioInter;
     LowlevelCmd *_lowCmd;
     LowlevelState *_lowState;
-    UserValue _userValue;
-    ArmDynKineModel *_armModel;
+    IOInterface *_ioInter;
+    ArmModel *_armModel;
 
-    Vec6 _qPast, _qdPast, _q, _qd, _qdd;
-    Vec6 _tau, _endForce;
+    Vec6 _qPast, _qdPast, _q, _qd, _qdd, _tauf, _tauCmd, _g;
+    double _gripperPos, _gripperW, _gripperTau;
+    uint _collisionCnt;
 
-    Vec6 _coulombFriction;
-    static Vec6 _coulombDirection;
-    Vec6 _linearFriction;
-
-    Vec6 _kpDiag, _kdDiag;
-    Mat6 _Kp, _Kd;
-
-    std::vector<double> _jointQMax;
-    std::vector<double> _jointQMin;
-    std::vector<double> _jointSpeedMax;
-
-    SendCmd _sendCmd;
-    RecvState _recvState;
+    CtrlComponents *_ctrlComp;
 };
 
 #endif  // FSMSTATE_H

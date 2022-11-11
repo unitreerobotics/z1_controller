@@ -3,7 +3,6 @@
 
 /* 归一化后的s曲线 */
 
-#include <math.h>
 #include <iostream>
 
 class SCurve{

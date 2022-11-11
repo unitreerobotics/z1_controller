@@ -3,8 +3,7 @@
 #include <vector>
 #include "common/math/mathTools.h"
 
-namespace mr {
-
+namespace robo {
 /*
  * Function: Find if the value is negligible enough to consider 0
  * Inputs: value to be checked as a double
@@ -12,6 +11,39 @@ namespace mr {
  */
 bool NearZero(const double);
 
+Mat6 rot(const Mat3& E);
+
+Mat6 xlt(const Vec3& r);
+
+/* rotate matrix about x axis */
+RotMat rotX(const double &);
+RotMat rx(const double &xrot);
+
+/* rotate matrix about y axis */
+RotMat rotY(const double &);
+RotMat ry(const double &yrot);
+
+/* rotate matrix about z axis */
+RotMat rotZ(const double &);
+RotMat rz(const double &zrot);
+
+/* row pitch yaw to rotate matrix */
+RotMat rpyToRotMat(const double&, const double&, const double&);
+RotMat rpyToRotMat(const Vec3& rpy);
+
+Vec3 rotMatToRPY(const Mat3& );
+
+RotMat quatToRotMat(const Quat&);
+
+/* convert homogeneous matrix to posture vector */
+Vec6 homoToPosture(HomoMat);
+
+/* convert posture vector matrix to homogeneous */
+HomoMat postureToHomo(Vec6);
+
+RotMat getHomoRotMat(HomoMat T);
+Vec3 getHomoPosition(HomoMat T);
+HomoMat homoMatrix(Vec3 x, Vec3 y, Vec3 p);
 /*
  * Function: Calculate the 6x6 matrix [adV] of the given 6-vector
  * Input: Eigen::VectorXd (6x1)
@@ -129,6 +161,21 @@ Eigen::MatrixXd MatrixExp6(const Eigen::MatrixXd&);
  * Returns: The matrix logarithm of R
  */
 Eigen::MatrixXd MatrixLog6(const Eigen::MatrixXd&);
+
+
+/*
+ * Functions: Tranforms 3D motion vector form A to B coordinates
+ * Input: T: the cordinate transform form A to B coordiantes for a motion vector
+ * Return : BX_A
+ */
+Mat6 CoordinateTransMotionVector(const HomoMat& T);
+
+/*
+ * Functions: Tranforms 3D force vector form A to B coordinates
+ * Input: T: the cordinate transform form A to B coordiantes for a force vector
+ * Return : {BX_A}*
+ */
+Mat6 CoordinateTransForceVector(const HomoMat& T);
 
 
 /*
@@ -460,72 +507,6 @@ Eigen::VectorXd ForwardDynamics(const Eigen::VectorXd&, const Eigen::VectorXd&, 
 
 
 /*
- * Function: Compute the joint angles and velocities at the next timestep using
-    first order Euler integration
- * Inputs:
- *  thetalist[in]: n-vector of joint variables
- *  dthetalist[in]: n-vector of joint rates
- *	ddthetalist: n-vector of joint accelerations
- *  dt: The timestep delta t
- *
- * Outputs:
- *  thetalist[out]: Vector of joint variables after dt from first order Euler integration
- *  dthetalist[out]: Vector of joint rates after dt from first order Euler integration
- */
-void EulerStep(Eigen::VectorXd&, Eigen::VectorXd&, const Eigen::VectorXd&, double);
-
-
-/*
- * Function: Compute the joint forces/torques required to move the serial chain along the given
- *	trajectory using inverse dynamics
- * Inputs:
- *  thetamat: An N x n matrix of robot joint variables (N: no. of trajecoty time step points; n: no. of robot joints
- *  dthetamat: An N x n matrix of robot joint velocities
- *  ddthetamat: An N x n matrix of robot joint accelerations
- *	g: Gravity vector g
- *	Ftipmat: An N x 6 matrix of spatial forces applied by the end-effector (if there are no tip forces
- *			 the user should input a zero matrix)
- *  Mlist: List of link frames {i} relative to {i-1} at the home position
- *  Glist: Spatial inertia matrices Gi of the links
- *  Slist: Screw axes Si of the joints in a space frame, in the format
- *         of a matrix with the screw axes as the columns.
- *
- * Outputs:
- *  taumat: The N x n matrix of joint forces/torques for the specified trajectory, where each of the N rows is the vector
- *			of joint forces/torques at each time step
- */
-Eigen::MatrixXd InverseDynamicsTrajectory(const Eigen::MatrixXd&, const Eigen::MatrixXd&, const Eigen::MatrixXd&,
-	const Eigen::VectorXd&, const Eigen::MatrixXd&, const std::vector<Eigen::MatrixXd>&, const std::vector<Eigen::MatrixXd>&,
-	const Eigen::MatrixXd&);
-
-
-/*
- * Function: Compute the motion of a serial chain given an open-loop history of joint forces/torques
- * Inputs:
- *  thetalist: n-vector of initial joint variables
- *  dthetalist: n-vector of initial joint rates
- *  taumat: An N x n matrix of joint forces/torques, where each row is is the joint effort at any time step
- *	g: Gravity vector g
- *	Ftipmat: An N x 6 matrix of spatial forces applied by the end-effector (if there are no tip forces
- *			 the user should input a zero matrix)
- *  Mlist: List of link frames {i} relative to {i-1} at the home position
- *  Glist: Spatial inertia matrices Gi of the links
- *  Slist: Screw axes Si of the joints in a space frame, in the format
- *         of a matrix with the screw axes as the columns.
- *	dt: The timestep between consecutive joint forces/torques
- *	intRes: Integration resolution is the number of times integration (Euler) takes places between each time step.
- *			Must be an integer value greater than or equal to 1
- *
- * Outputs: std::vector of [thetamat, dthetamat]
- *  thetamat: The N x n matrix of joint angles resulting from the specified joint forces/torques
- *  dthetamat: The N x n matrix of joint velocities
- */
-std::vector<Eigen::MatrixXd> ForwardDynamicsTrajectory(const Eigen::VectorXd&, const Eigen::VectorXd&, const Eigen::MatrixXd&,
-	const Eigen::VectorXd&, const Eigen::MatrixXd&, const std::vector<Eigen::MatrixXd>&, const std::vector<Eigen::MatrixXd>&,
-	const Eigen::MatrixXd&, double, int);
-
-
-/*
  * Function: Compute the joint control torques at a particular time instant
  * Inputs:
  *  thetalist: n-vector of joint variables
@@ -550,136 +531,5 @@ std::vector<Eigen::MatrixXd> ForwardDynamicsTrajectory(const Eigen::VectorXd&, c
 Eigen::VectorXd ComputedTorque(const Eigen::VectorXd&, const Eigen::VectorXd&, const Eigen::VectorXd&,
 	const Eigen::VectorXd&, const std::vector<Eigen::MatrixXd>&, const std::vector<Eigen::MatrixXd>&,
 	const Eigen::MatrixXd&, const Eigen::VectorXd&, const Eigen::VectorXd&, const Eigen::VectorXd&, double, double, double);
-
-
-/*
- * Function: Compute s(t) for a cubic time scaling
- * Inputs:
- *  Tf: Total time of the motion in seconds from rest to rest
- *  t: The current time t satisfying 0 < t < Tf
- *
- * Outputs:
- *  st: The path parameter corresponding to a third-order
- *      polynomial motion that begins and ends at zero velocity
- */
-double CubicTimeScaling(double, double);
-
-
-/*
- * Function: Compute s(t) for a quintic time scaling
- * Inputs:
- *  Tf: Total time of the motion in seconds from rest to rest
- *  t: The current time t satisfying 0 < t < Tf
- *
- * Outputs:
- *  st: The path parameter corresponding to a fifth-order
- *      polynomial motion that begins and ends at zero velocity
- *	    and zero acceleration
- */
-double QuinticTimeScaling(double, double);
-
-
-/*
- * Function: Compute a straight-line trajectory in joint space
- * Inputs:
- *  thetastart: The initial joint variables
- *  thetaend: The final joint variables
- *  Tf: Total time of the motion in seconds from rest to rest
- *	N: The number of points N > 1 (Start and stop) in the discrete
- *     representation of the trajectory
- *  method: The time-scaling method, where 3 indicates cubic (third-
- *          order polynomial) time scaling and 5 indicates quintic
- *          (fifth-order polynomial) time scaling
- *
- * Outputs:
- *  traj: A trajectory as an N x n matrix, where each row is an n-vector
- *        of joint variables at an instant in time. The first row is
- *        thetastart and the Nth row is thetaend . The elapsed time
- *        between each row is Tf / (N - 1)
- */
-Eigen::MatrixXd JointTrajectory(const Eigen::VectorXd&, const Eigen::VectorXd&, double, int, int);
-
-
-/*
- * Function: Compute a trajectory as a list of N SE(3) matrices corresponding to
- *			 the screw motion about a space screw axis
- * Inputs:
- *  Xstart: The initial end-effector configuration
- *  Xend: The final end-effector configuration
- *  Tf: Total time of the motion in seconds from rest to rest
- *	N: The number of points N > 1 (Start and stop) in the discrete
- *     representation of the trajectory
- *  method: The time-scaling method, where 3 indicates cubic (third-
- *          order polynomial) time scaling and 5 indicates quintic
- *          (fifth-order polynomial) time scaling
- *
- * Outputs:
- *  traj: The discretized trajectory as a list of N matrices in SE(3)
- *        separated in time by Tf/(N-1). The first in the list is Xstart
- *        and the Nth is Xend
- */
-std::vector<Eigen::MatrixXd> ScrewTrajectory(const Eigen::MatrixXd&, const Eigen::MatrixXd&, double, int, int);
-
-
-/*
- * Function: Compute a trajectory as a list of N SE(3) matrices corresponding to
- *			 the origin of the end-effector frame following a straight line
- * Inputs:
- *  Xstart: The initial end-effector configuration
- *  Xend: The final end-effector configuration
- *  Tf: Total time of the motion in seconds from rest to rest
- *	N: The number of points N > 1 (Start and stop) in the discrete
- *     representation of the trajectory
- *  method: The time-scaling method, where 3 indicates cubic (third-
- *          order polynomial) time scaling and 5 indicates quintic
- *          (fifth-order polynomial) time scaling
- *
- * Outputs:
- *  traj: The discretized trajectory as a list of N matrices in SE(3)
- *        separated in time by Tf/(N-1). The first in the list is Xstart
- *        and the Nth is Xend
- * Notes:
- *	This function is similar to ScrewTrajectory, except the origin of the
- *  end-effector frame follows a straight line, decoupled from the rotational
- *  motion.
- */
-std::vector<Eigen::MatrixXd> CartesianTrajectory(const Eigen::MatrixXd&, const Eigen::MatrixXd&, double, int, int);
-
-
-/*
- * Function: Compute the motion of a serial chain given an open-loop history of joint forces/torques
- * Inputs:
- *  thetalist: n-vector of initial joint variables
- *  dthetalist: n-vector of initial joint rates
- *	g: Gravity vector g
- *	Ftipmat: An N x 6 matrix of spatial forces applied by the end-effector (if there are no tip forces
- *			 the user should input a zero matrix)
- *  Mlist: List of link frames {i} relative to {i-1} at the home position
- *  Glist: Spatial inertia matrices Gi of the links
- *  Slist: Screw axes Si of the joints in a space frame, in the format
- *         of a matrix with the screw axes as the columns.
- *  thetamatd: An Nxn matrix of desired joint variables from the reference trajectory
- *  dthetamatd: An Nxn matrix of desired joint velocities
- *  ddthetamatd: An Nxn matrix of desired joint accelerations
- *	gtilde: The gravity vector based on the model of the actual robot (actual values given above)
- *  Mtildelist: The link frame locations based on the model of the actual robot (actual values given above)
- *  Gtildelist: The link spatial inertias based on the model of the actual robot (actual values given above)
- *	Kp: The feedback proportional gain (identical for each joint)
- *	Ki: The feedback integral gain (identical for each joint)
- *	Kd: The feedback derivative gain (identical for each joint)
- *	dt: The timestep between points on the reference trajectory
- *	intRes: Integration resolution is the number of times integration (Euler) takes places between each time step.
- *			Must be an integer value greater than or equal to 1
- *
- * Outputs: std::vector of [taumat, thetamat]
- *  taumat: An Nxn matrix of the controllers commanded joint forces/ torques, where each row of n forces/torques
- *			  corresponds to a single time instant
- *  thetamat: The N x n matrix of actual joint angles
- */
-std::vector<Eigen::MatrixXd> SimulateControl(const Eigen::VectorXd&, const Eigen::VectorXd&, const Eigen::VectorXd&,
-	const Eigen::MatrixXd&, const std::vector<Eigen::MatrixXd>&, const std::vector<Eigen::MatrixXd>&,
-	const Eigen::MatrixXd&, const Eigen::MatrixXd&, const Eigen::MatrixXd&, const Eigen::MatrixXd&,
-	const Eigen::VectorXd&, const std::vector<Eigen::MatrixXd>&, const std::vector<Eigen::MatrixXd>&,
-	double, double, double, double, int);
 
 }

@@ -12,17 +12,15 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    double _posSpeed;
-    double _oriSpeed;
-    Vec3 _omega;
-    Vec3 _velocity;
+    double _oriSpeed = 0.4;// control by keyboard or joystick
+    double _posSpeed = 0.15;
+    double oriSpeedLimit = 0.3;// limits in SDK
+    double posSpeedLimit = 0.3;
+    VecX _changeDirections;
+
     Vec6 _twist;
     HomoMat _endHomoGoal, _endHomoGoalPast;
     Vec6 _endPostureGoal, _endPosturePast, _endPostureDelta;
-    HomoMat _endHomoFeedback;
-    Vec6 _Pdes;
-    Vec6 _Pfd;
-    Vec6 _Pkp;
 };
 
 #endif  // CARTESIAN_H

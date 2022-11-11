@@ -1,47 +1,49 @@
 #ifndef CTRLCOMPONENTS_H
 #define CTRLCOMPONENTS_H
 
-#include "message/LowlevelCmd.h"
-#include "message/LowlevelState.h"
-#include "interface/IOInterface.h"
-#include "interface/IOROS.h"
-#include "model/ArmDynKineModel.h"
-#include "common/utilities/CSVTool.h"
 #include <string>
 #include <iostream>
-#include "common/math/robotics.h"
+#include "common/utilities/loop.h"
+#include "message/arm_common.h"
+#include "message/LowlevelCmd.h"
+#include "message/LowlevelState.h"
+#include "common/utilities/CSVTool.h"
+#include "model/ArmModel.h"
+#include "interface/IOUDP.h"
+#include "interface/IOROS.h"
+#include "control/armSDK.h"
+
+using namespace std;
 
 struct CtrlComponents{
 public:
     CtrlComponents();
     ~CtrlComponents();
 
-    int dof;
     std::string armConfigPath;
-    LowlevelCmd *lowCmd;
-    LowlevelState *lowState;
+    CmdPanel *cmdPanel;
     IOInterface *ioInter;
-    ArmDynKineModel *armModel;
+    ArmModel *armModel;
     CSVTool *stateCSV;
+
+    SendCmd sendCmd; // cmd that receive from SDK 
+    RecvState recvState;// state that send to SDK
     
     //config
-    Control ctrl;
-    bool _hasGripper;
-    std::string ctrl_IP;
-
     double dt;
     bool *running;
+    Control ctrl;
+    bool hasGripper;
+    bool isCollisionOpen;
+    double collisionTLimit;
+    bool isPlot;
 
-    void sendRecv();
     void geneObj();
-
-    bool isRecord;
     void writeData();
 private:
-    Vec3 _endPosLocal;
-    double _endEffectorMass;
-    Vec3 _endEffectorCom;
-    Mat3 _endEffectorInertia;
+    std::string ctrl_IP;
+    uint ctrl_port;
+    double _loadWeight;
 };
 
 #endif  // CTRLCOMPONENTS_H

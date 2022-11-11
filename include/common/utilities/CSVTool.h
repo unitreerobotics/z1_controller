@@ -181,7 +181,7 @@ inline void CSVTool::readFile(){
 
 inline bool CSVTool::getLine(std::string label, std::vector<double> &values){
     if(_labels.count(label) == 0){
-        // std::cout << "[ERROR] No such label: " << label << std::endl;
+        std::cout << "[ERROR] No such label: " << label << std::endl;
         return false;
     }else{
         _lines.at(_labels[label])->getValues(values);

@@ -5,29 +5,20 @@
 
 #include <ros/ros.h>
 #include "interface/IOInterface.h"
-#include "unitree_arm_sdk/keyboard.h"
-#include "message/unitree_legged_msgs/MotorCmd.h"
-#include "message/unitree_legged_msgs/MotorState.h"
+#include "message/MotorCmd.h"
+#include "message/MotorState.h"
 
 class IOROS : public IOInterface{
 public:
-    IOROS(CmdPanel *cmdPanel, bool hasGripper);
+    IOROS();
     ~IOROS();
     bool sendRecv(const LowlevelCmd *cmd, LowlevelState *state);
 private:
-    bool _hasGripper;
     ros::NodeHandle _nm;
-// #ifdef UNITREE_GRIPPER
     ros::Subscriber _servo_sub[7];
     ros::Publisher _servo_pub[7];
     unitree_legged_msgs::MotorState _joint_state[7];
     unitree_legged_msgs::MotorCmd _joint_cmd[7];
-// #else
-//     ros::Subscriber _servo_sub[6];
-//     ros::Publisher _servo_pub[6];
-//     unitree_legged_msgs::MotorState _joint_state[6];
-//     unitree_legged_msgs::MotorCmd _joint_cmd[6];
-// #endif
     void _sendCmd(const LowlevelCmd *cmd);
     void _recvState(LowlevelState *state);
     void _initRecv();

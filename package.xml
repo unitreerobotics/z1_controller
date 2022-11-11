@@ -10,15 +10,12 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscp</build_depend>
-  <build_depend>rospy</build_depend>
   <build_depend>urdf</build_depend>
   <build_depend>xacro</build_depend>
   <build_export_depend>roscp</build_export_depend>
-  <build_export_depend>rospy</build_export_depend>
   <build_export_depend>urdf</build_export_depend>
   <build_export_depend>xacro</build_export_depend>
   <exec_depend>roscp</exec_depend>
-  <exec_depend>rospy</exec_depend>
   <exec_depend>urdf</exec_depend>
   <exec_depend>xacro</exec_depend>
 

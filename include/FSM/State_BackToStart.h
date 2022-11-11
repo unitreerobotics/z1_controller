@@ -1,14 +1,21 @@
 #ifndef STATE_BACKTOSTART_H
 #define STATE_BACKTOSTART_H
 
-#include "FSM/State_Trajectory.h"
 
-class State_BackToStart : public State_Trajectory{
+#include "FSM/FSMState.h"
+#include "trajectory/JointSpaceTraj.h"
+
+class State_BackToStart : public FSMState{
 public:
     State_BackToStart(CtrlComponents *ctrlComp);
+    ~State_BackToStart();
+    void enter();
+    void run();
+    void exit();
+    int checkChange(int cmd);
 private:
-    void _setTraj();
-    void _setTrajSDK(){}
+    bool _reach, _pastReach;
+    JointSpaceTraj *_jointTraj;
 };
 
 #endif  // STATE_BACKTOSTART_H

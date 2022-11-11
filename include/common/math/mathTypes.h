@@ -2,6 +2,7 @@
 #define MATHTYPES_H
 
 #include <eigen3/Eigen/Dense>
+#include <vector>
 
 /************************/
 /******** Vector ********/
@@ -96,4 +97,13 @@ inline VecX stdVecToEigenVec(T stdVec){
     VecX eigenVec = Eigen::VectorXd::Map(&stdVec[0], stdVec.size());
     return eigenVec;
 }
+
+inline std::vector<double> EigenVectostdVec(VecX eigenVec){
+    std::vector<double> stdVec;
+    for(int i(0); i<eigenVec.size();i++){
+        stdVec.push_back(eigenVec(i));
+    }
+    return stdVec;
+}
+
 #endif  // MATHTYPES_H

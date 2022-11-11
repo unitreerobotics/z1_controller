@@ -19,7 +19,6 @@ private:
     JointSpaceTraj *_jointTraj;
     bool _reach, _pastReach;
     std::string _goalName;
-    // CSVTool *_csv;
 };
 
 #endif  // TOSTATE_H

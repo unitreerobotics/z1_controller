@@ -1,7 +1,7 @@
 #ifndef PASSIVE_H
 #define PASSIVE_H
 
-#include "FSMState.h"
+#include "FSM/FSMState.h"
 
 class State_Passive : public FSMState{
 public:

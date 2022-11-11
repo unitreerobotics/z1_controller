@@ -1,5 +1,5 @@
-#ifndef LOWPASSFILTER
-#define LOWPASSFILTER
+#ifndef FILTER
+#define FILTER
 
 #include <vector>
 #include <Eigen/Dense>
@@ -26,4 +26,4 @@ private:
     bool _start;
 };
 
-#endif  // LOWPASSFILTER
+#endif  // FILTER

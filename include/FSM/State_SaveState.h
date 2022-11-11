@@ -13,9 +13,6 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    CSVTool *_csv;
-    Vec6 _q;
-    HomoMat _endHomo;
 };
 
 #endif  // SAVESTATE_H

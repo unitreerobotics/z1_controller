@@ -11,8 +11,6 @@
 class TrajectoryManager{
 public:
     TrajectoryManager(CtrlComponents *ctrlComp);
-    TrajectoryManager(ArmDynKineModel *armModel);
-    TrajectoryManager(ArmDynKineModel *armModel, CSVTool *csvState);
     ~TrajectoryManager(){}
     bool getJointCmd(Vec6 &q, Vec6 &qd);
     bool getJointCmd(Vec6 &q, Vec6 &qd, double &gripperQ, double &gripperQd);
@@ -23,10 +21,10 @@ public:
     Vec6 getStartQ();
     Vec6 getEndQ();
     Vec6 getEndPosture();
-    double getEndGripperQ();
     double getStartGripperQ();
+    double getEndGripperQ();
     HomoMat getEndHomo();
-    // bool checkTrajectoryContinuous();
+    size_t size() {return _trajVec.size();} ;
 private:
     CtrlComponents *_ctrlComp;
     JointSpaceTraj *_trajBack;

@@ -2,7 +2,6 @@
 #define CARTESIANPATH_H
 
 #include "FSM/FSMState.h"
-#include "trajectory/EndHomoTraj.h"
 #include "trajectory/TrajectoryManager.h"
 
 class State_Trajectory : public FSMState{
@@ -16,12 +15,12 @@ public:
     void exit();
     int checkChange(int cmd);
 protected:
-    // EndHomoTraj *_traj;
-    virtual void _setTraj();
-    virtual void _setTrajSdk();
+    void _setTraj();
+    void _setTrajSDK();
     TrajectoryManager *_traj;
     HomoMat _goalHomo;
     Vec6 _goalTwist;
+    double speedTemp;
 
     JointSpaceTraj *_toStartTraj;
     bool _reachedStart = false;
@@ -31,11 +30,8 @@ protected:
     std::vector<StopForTime*> _stopTraj;
     std::vector<EndLineTraj*> _lineTraj;
 
-    long long startTime;
     static std::vector<TrajCmd> _trajCmd;
     Vec6 _posture[2];
-
-    static bool _isTrajFSM;
 };
 
 #endif  // CARTESIANPATH_H

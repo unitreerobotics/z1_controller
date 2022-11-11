@@ -7,8 +7,6 @@
 #include <iostream>
 
 struct LowlevelCmd{
-private:
-    size_t _dof = 6;
 public:
     std::vector<double> q;
     std::vector<double> dq;
@@ -16,9 +14,10 @@ public:
     std::vector<double> kp;
     std::vector<double> kd;
 
-    std::vector<std::vector<double>> q_cmd_data;
-    std::vector<std::vector<double>> dq_cmd_data;
-    std::vector<std::vector<double>> tau_cmd_data;
+    std::vector<std::vector<double>> q_data; 
+    std::vector<std::vector<double>> dq_data; 
+    std::vector<std::vector<double>> tauf_data;
+    std::vector<std::vector<double>> tau_data;
 
     LowlevelCmd();
     ~LowlevelCmd(){}
@@ -27,13 +26,14 @@ public:
     void setZeroTau();
     void setZeroKp();
     void setZeroKd();
-    void setControlGain();
-    void setControlGain(std::vector<float> KP, std::vector<float> KW);
-    void setQ(std::vector<double> qInput);
     void setQ(VecX qInput);
     void setQd(VecX qDInput);
     void setTau(VecX tauInput);
+
+    void setControlGain();
+    void setControlGain(std::vector<float> KP, std::vector<float> KW);
     void setPassive();
+
     void setGripperGain();
     void setGripperGain(float KP, float KW);
     void setGripperZeroGain();
@@ -43,10 +43,13 @@ public:
     double getGripperQd();
     void setGripperTau(double tauInput);
     double getGripperTau();
+    
     Vec6 getQ();
     Vec6 getQd();
 
     void resizeGripper();
+private:
+    size_t _dof = 6;
 };
 
 

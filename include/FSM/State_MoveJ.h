@@ -13,11 +13,10 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    double _costTime;
-    HomoMat _goalHomo;
+    double _speed;
     JointSpaceTraj *_jointTraj;
     bool _reached, _pastReached, _finalReached;
-    std::vector<Vec6> _result;
+    std::vector<Vec6> _qCmd;
 };
 
 #endif  // CARTESIAN_H

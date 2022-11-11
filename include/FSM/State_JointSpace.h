@@ -12,7 +12,7 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    double _angleStep;
+    std::vector<double> jointSpeedMax;
 };
 
 #endif  // JOINTSPACE_H

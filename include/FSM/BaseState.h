@@ -23,10 +23,10 @@ public:
         }
     }
     std::string getStateName(){return _stateNameString;}
+    int getStateNameEnum(){return _stateNameEnum;};
 protected:
     int _stateNameEnum;
     std::string _stateNameString;
-    Control _ctrl;
 };
 
 #endif
