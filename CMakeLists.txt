@@ -8,6 +8,7 @@ set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -O3")
 set(COMMUNICATION UDP)            # UDP
 # set(COMMUNICATION ROS)          # ROS
 
+
 # ----------------------configurations----------------------
 # COMMUNICATION
 if(${COMMUNICATION} STREQUAL "UDP")
@@ -58,7 +59,6 @@ include_directories(
 )
 
 link_directories(lib)
-
 
 # ----------------------add executable----------------------
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../build)                # EXECUTABLE:CMAKE_RUNTIME_OUTPUT_DIRECTORY

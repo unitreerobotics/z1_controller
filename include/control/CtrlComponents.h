@@ -37,6 +37,7 @@ public:
     bool isCollisionOpen;
     double collisionTLimit;
     bool isPlot;
+    int trajChoose = 1;
 
     void geneObj();
     void writeData();
