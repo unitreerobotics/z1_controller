@@ -2,12 +2,12 @@
 #define _UNITREE_ARM_JOYSTICK_H_
 
 #include <vector>
-#include "message/udp.h"
 #include "control/cmdPanel.h"
 #include "message/joystick_common.h"
 #include "message/aliengo_common.h"
 #include "message/b1_common.h"
 #include <math.h>
+#include "message/udp.h"
 
 using namespace UNITREE_LEGGED_SDK_ALIENGO;
 // using namespace UNITREE_LEGGED_SDK_B1;
@@ -18,8 +18,8 @@ public:
         EmptyAction emptyAction, size_t channelNum = 1,
         double dt = 0.002)
         :  CmdPanel(events, emptyAction, channelNum, dt){
-        _udp = new UDPPort("dog", "192.168.123.220", 8082, 8081, HIGH_STATE_LENGTH, BlockYN::NO, 500000);
-
+        _udp = new UDPPort("dog", "192.168.123.220", 8082, 8081);
+        _udp->resetIO(BlockYN::NO, HIGH_STATE_LENGTH, 500000);
         _udpCmd = {0};
         _udpState = {0};
         _readThread = new LoopFunc("JoyStickRead", 0.0, boost::bind(&UnitreeJoystick::_read, this));
@@ -28,10 +28,9 @@ public:
         _runThread->start();
     };
     ~UnitreeJoystick(){
-        delete _udp;
         delete _runThread;
         delete _readThread;
-        
+        delete _udp;
     };
 private:
     void _read(){

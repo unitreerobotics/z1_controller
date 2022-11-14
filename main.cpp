@@ -17,7 +17,6 @@
 #include "FSM/State_LowCmd.h"
 #include "FSM/State_SetTraj.h"
 
-const std::string Z1_CTRL_VERSION = "2022.11.11";
 bool running = true;
 
 // over watch the ctrl+c command
@@ -32,18 +31,11 @@ void setProcessScheduler(){
     sched_param param;
     param.sched_priority = sched_get_priority_max(SCHED_FIFO);
     if (sched_setscheduler(pid, SCHED_FIFO, &param) == -1) {
-        std::cout << "[ERROR] Function setProcessScheduler failed." << std::endl;
+        // std::cout << "[ERROR] Function setProcessScheduler failed." << std::endl;
     }
 }
 
 int main(int argc, char **argv){
-    if(argc == 2) {
-        if((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)){
-            std::cout << "Version z1_controller: "<< Z1_CTRL_VERSION<<std::endl;
-            return 0;
-        }
-    }
-    
     /* set real-time process */
     setProcessScheduler();
     /* set the print format */
@@ -52,18 +44,7 @@ int main(int argc, char **argv){
 
     EmptyAction emptyAction((int)ArmFSMStateName::INVALID);
     std::vector<KeyAction*> events;
-    CtrlComponents *ctrlComp = new CtrlComponents();
-
-    // control method
-    if(argc == 2) {
-        if(argv[1][0] == 'k'){
-            ctrlComp->ctrl = Control::KEYBOARD;
-        }else if(argv[1][0] == 's'){
-            ctrlComp->ctrl = Control::SDK;
-        }else if(argv[1][0] == 'j'){
-            ctrlComp->ctrl = Control::JOYSTICK;
-        }
-    }
+    CtrlComponents *ctrlComp = new CtrlComponents(argc, argv);
     
 #ifdef COMPILE_WITH_SIMULATION
     ros::init(argc, argv, "z1_controller");
@@ -143,7 +124,6 @@ int main(int argc, char **argv){
         usleep(100000);
     }
 
-    delete fsm;
     delete ctrlComp;
     return 0;
 }

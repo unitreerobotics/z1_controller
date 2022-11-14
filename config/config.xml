@@ -1,11 +1,5 @@
 <configurartion>
-    <control set=2>
-        <option1>keyboard</option1>
-        <option2>sdk</option2>
-        <option3>joystick</option3> <!-- default aliengo_joystick -->
-    </control>
-
-    <!-- slave computer communication -->
+    <!-- lower computer communication -->
     <IP>192.168.123.110</IP>
     <Port>8881</Port>
 
@@ -14,4 +8,5 @@
         <limitT>10.0</limitT> <!-- N*M -->
         <load>0.0</load><!-- kg-->
     </collision>
+    <!-- <plot set=1/> -->
 </configurartion>

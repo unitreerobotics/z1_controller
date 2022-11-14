@@ -17,18 +17,19 @@ enum class BlockYN{
 
 class IOPort{
 public:
-    IOPort(std::string name, BlockYN blockYN, size_t recvLength, size_t timeOutUs)
+    IOPort(std::string name, BlockYN blockYN, size_t recvLength, size_t timeOutUs, bool showInfo)
         :_name(name){
-        resetIO(blockYN, recvLength, timeOutUs);
+        resetIO(blockYN, recvLength, timeOutUs, showInfo);
     }
     virtual ~IOPort(){}
     virtual size_t send(uint8_t *sendMsg, size_t sendLength) = 0;
     virtual size_t recv(uint8_t *recvMsg, size_t recvLength) = 0;
     virtual size_t recv(uint8_t *recvMsg) = 0;
     virtual bool sendRecv(std::vector<MOTOR_send> &sendVec, std::vector<MOTOR_recv> &recvVec) = 0;
-    void resetIO(BlockYN blockYN, size_t recvLength, size_t timeOutUs);
+    void resetIO(BlockYN blockYN, size_t recvLength, size_t timeOutUs, bool showInfo = true);
     bool isDisConnect = false;
 protected:
+    bool _showInfo;
     std::string _name;
     BlockYN _blockYN = BlockYN::NO;
     size_t _recvLength;
@@ -43,7 +44,8 @@ public:
     UDPPort(std::string name, std::string toIP, uint toPort, uint ownPort, 
             size_t recvLength = 0,
             BlockYN blockYN = BlockYN::NO,
-            size_t timeOutUs = 20000);
+            size_t timeOutUs = 20000,
+            bool showInfo = true);
     ~UDPPort();
     size_t send(uint8_t *sendMsg, size_t sendMsgLength);
     size_t recv(uint8_t *recvMsg, size_t recvLength);

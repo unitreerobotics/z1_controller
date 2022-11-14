@@ -17,7 +17,7 @@ using namespace std;
 
 struct CtrlComponents{
 public:
-    CtrlComponents();
+    CtrlComponents(int argc, char**argv);
     ~CtrlComponents();
 
     std::string armConfigPath;
@@ -42,6 +42,8 @@ public:
     void geneObj();
     void writeData();
 private:
+    void inputProcess(int argc, char** argv);
+
     std::string ctrl_IP;
     uint ctrl_port;
     double _loadWeight;
