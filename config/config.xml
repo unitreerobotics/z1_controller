@@ -8,5 +8,4 @@
         <limitT>10.0</limitT> <!-- N*M -->
         <load>0.0</load><!-- kg-->
     </collision>
-    <!-- <plot set=1/> -->
 </configurartion>
