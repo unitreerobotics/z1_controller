@@ -7,7 +7,6 @@
 #include <string.h>
 #include <vector>
 #include "common/utilities/timer.h"
-#include "message/arm_motor_common.h"
 
 enum class BlockYN{
     YES,
@@ -25,7 +24,6 @@ public:
     virtual size_t send(uint8_t *sendMsg, size_t sendLength) = 0;
     virtual size_t recv(uint8_t *recvMsg, size_t recvLength) = 0;
     virtual size_t recv(uint8_t *recvMsg) = 0;
-    virtual bool sendRecv(std::vector<MOTOR_send> &sendVec, std::vector<MOTOR_recv> &recvVec) = 0;
     void resetIO(BlockYN blockYN, size_t recvLength, size_t timeOutUs, bool showInfo = true);
     bool isDisConnect = false;
 protected:
@@ -50,7 +48,6 @@ public:
     size_t send(uint8_t *sendMsg, size_t sendMsgLength);
     size_t recv(uint8_t *recvMsg, size_t recvLength);
     size_t recv(uint8_t *recvMsg);
-    bool sendRecv(std::vector<MOTOR_send> &sendVec, std::vector<MOTOR_recv> &recvVec);
 private:
     size_t _recvBlock(uint8_t *recvMsg, size_t recvLength);
     size_t _recvUnBlock(uint8_t *recvMsg, size_t recvLength);

@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "common/math/robotics.h"
-#include "common/math/quadProgpp/QuadProg++.hh"
+#include "thirdparty/quadProgpp/QuadProg++.hh"
 
 using namespace robo;
 
