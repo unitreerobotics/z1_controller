@@ -124,6 +124,7 @@ int main(int argc, char **argv){
         usleep(100000);
     }
 
+    delete fsm;
     delete ctrlComp;
     return 0;
 }
