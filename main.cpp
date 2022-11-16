@@ -50,7 +50,6 @@ int main(int argc, char **argv){
     ros::init(argc, argv, "z1_controller");
 #endif
 
-    // ctrlComp->isPlot = true;
     ctrlComp->dt = 1.0/250.;
     ctrlComp->armConfigPath =  "../config/";
     ctrlComp->stateCSV = new CSVTool("../config/savedArmStates.csv");
@@ -96,7 +95,7 @@ int main(int argc, char **argv){
         events.push_back(new ValueAction("Y",           "A",            0.5));//Rot_Z
         events.push_back(new ValueAction("right",       "left",         1.0));//girpper, close-open
 
-        ctrlComp->cmdPanel = new UnitreeJoystick(events, emptyAction);
+        ctrlComp->cmdPanel = new UnitreeJoystick(ctrlComp->dogType, events, emptyAction);
     }
     std::vector<FSMState*> states;
     states.push_back(new State_Passive(ctrlComp));

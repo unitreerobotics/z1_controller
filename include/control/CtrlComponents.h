@@ -38,6 +38,7 @@ public:
     double collisionTLimit;
     bool isPlot;
     int trajChoose = 1;
+    size_t dogType = 1;//1:Aliengo 2:B1
 
     void geneObj();
     void writeData();

@@ -5,7 +5,7 @@
 
 class IOUDP : public IOInterface{
 public:
-    IOUDP(const char* IP, uint port, bool showInfo = true);
+    IOUDP(const char* IP, uint port, size_t timeOutUs = 100000, bool showInfo = true);
     ~IOUDP();
 
     bool sendRecv(const LowlevelCmd *cmd, LowlevelState *state);
