@@ -39,7 +39,7 @@ int main(int argc, char **argv){
     /* set real-time process */
     setProcessScheduler();
     /* set the print format */
-    std::cout << std::fixed << std::setprecision(3);
+    std::cout << std::fixed << std::setprecision(5);
 
 
     EmptyAction emptyAction((int)ArmFSMStateName::INVALID);
@@ -80,22 +80,6 @@ int main(int argc, char **argv){
         events.push_back(new ValueAction("down", "up", 1.));
 
         ctrlComp->cmdPanel = new Keyboard(events, emptyAction);
-    }else if(ctrlComp->ctrl == Control::JOYSTICK){
-        events.push_back(new StateAction("r2x",     (int)ArmFSMStateName::TRAJECTORY));
-        events.push_back(new StateAction("l12",     (int)ArmFSMStateName::PASSIVE));
-        events.push_back(new StateAction("r2",      (int)ArmFSMStateName::JOINTCTRL));
-        events.push_back(new StateAction("r1",      (int)ArmFSMStateName::CARTESIAN));
-        events.push_back(new StateAction("select",  (int)ArmFSMStateName::BACKTOSTART));
-
-        events.push_back(new ValueAction("left_up",     "left_down",    0.5));//Tran_Y
-        events.push_back(new ValueAction("left_right",   "left_left",   0.5));//Tran_X, inverse
-        events.push_back(new ValueAction("up",          "down",         -0.5));//Tran_Z, inverse
-        events.push_back(new ValueAction("right_up",    "right_down",   0.5));//Rot_Y
-        events.push_back(new ValueAction("right_left",  "right_right",  0.5));//Rot_x
-        events.push_back(new ValueAction("Y",           "A",            0.5));//Rot_Z
-        events.push_back(new ValueAction("right",       "left",         1.0));//girpper, close-open
-
-        ctrlComp->cmdPanel = new UnitreeJoystick(ctrlComp->dogType, events, emptyAction);
     }
     std::vector<FSMState*> states;
     states.push_back(new State_Passive(ctrlComp));
@@ -112,7 +96,7 @@ int main(int argc, char **argv){
     states.push_back(new State_ToState(ctrlComp));
     states.push_back(new State_Trajectory(ctrlComp));
     states.push_back(new State_Calibration(ctrlComp));
-    states.push_back(new State_SetTraj(ctrlComp));
+    // states.push_back(new State_SetTraj(ctrlComp));
 
     FiniteStateMachine *fsm;
     fsm = new FiniteStateMachine(states, ctrlComp);

@@ -17,5 +17,6 @@ private:
     std::vector<Vec6>  _postures;
     EndLineTraj *_lineTraj;
     bool _timeReached, _taskReached, _pastTaskReached, _finalReached;
+    uint _taskCnt;
 };
 #endif  // CARTESIAN_H

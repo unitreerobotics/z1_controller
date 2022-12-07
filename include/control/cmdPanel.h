@@ -56,12 +56,6 @@ private:
 
 };
 
-
-/* 
-必须为长按, deltaValue为每秒改变量 
-valueAction允许共用按键，例如空格停止
-但是正反转、停止键不可重复
-*/
 class ValueAction : public KeyAction{
 public:    
     ValueAction(std::string cUp, std::string cDown, double deltaValue, double initValue = 0.0);

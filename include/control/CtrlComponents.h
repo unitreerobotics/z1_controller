@@ -32,18 +32,19 @@ public:
     //config
     double dt;
     bool *running;
-    Control ctrl;
+    Control ctrl = Control::SDK;
     bool hasGripper;
     bool isCollisionOpen;
     double collisionTLimit;
     bool isPlot;
     int trajChoose = 1;
-    size_t dogType = 1;//1:Aliengo 2:B1
+    size_t armType = 36;
 
     void geneObj();
     void writeData();
 private:
     void inputProcess(int argc, char** argv);
+    void configProcess();
 
     std::string ctrl_IP;
     uint ctrl_port;

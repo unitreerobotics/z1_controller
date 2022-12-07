@@ -5,7 +5,6 @@
 #include "message/LowlevelCmd.h"
 #include "message/LowlevelState.h"
 #include "control/keyboard.h"
-#include "control/joystick.h"
 #include "common/math/robotics.h"
 
 class IOInterface{

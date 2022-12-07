@@ -12,14 +12,14 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    double _oriSpeed = 0.4;// control by keyboard or joystick
-    double _posSpeed = 0.15;
-    double oriSpeedLimit = 0.3;// limits in SDK
-    double posSpeedLimit = 0.3;
+    double _oriSpeed = 0.4;// control by keyboard
+    double _posSpeed = 0.3;
+    double oriSpeedLimit = 0.5;// limits in SDK
+    double posSpeedLimit = 0.5;
     VecX _changeDirections;
 
     Vec6 _twist;
-    HomoMat _endHomoGoal, _endHomoGoalPast;
+    HomoMat _endHomoGoal, _endHomoPast, _endHomoDelta;
     Vec6 _endPostureGoal, _endPosturePast, _endPostureDelta;
 };
 

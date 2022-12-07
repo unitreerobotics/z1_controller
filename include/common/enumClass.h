@@ -33,8 +33,7 @@ enum class JointMotorType{
 
 enum class Control{
     KEYBOARD,
-    SDK,
-    JOYSTICK
+    SDK
 };
 
 #endif  // ENUMCLASS_H

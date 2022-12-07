@@ -26,19 +26,6 @@ enum class ArmFSMState{
     LOWCMD
 };
 
-// 4 Byte
-enum class ArmFSMValue{
-    INVALID,
-    Q,A,
-    W,S,  
-    E,D,
-    R,F,
-    T,G, 
-    Y,H,   
-    DOWN,
-    UP
-};
-
 enum class TrajType{
     MoveJ,
     MoveL,

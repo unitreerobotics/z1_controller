@@ -41,7 +41,6 @@ protected:
     HomoMat _startHomo, _endHomo;
     Vec6 _startPosture, _endPosture, _deltaPosture;
     double _startGripperQ, _endGripperQ;
-
 };
 
 #endif  // TRAJECTORY_H

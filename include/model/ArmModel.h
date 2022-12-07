@@ -14,7 +14,8 @@ public:
 
     HomoMat forwardKinematics(Vec6 q, int index = 6);
     virtual bool inverseKinematics(HomoMat TDes, Vec6 qPast, Vec6& q_result, bool checkInWorkSpace = false);
-    Mat6 CalcJacobian(Vec6 q);
+    Mat6 CalcJacobianSpace(Vec6 q);
+    Mat6 CalcJacobianBody(Vec6 q);
     Vec6 inverseDynamics(Vec6 q, Vec6 qd, Vec6 qdd, Vec6 Ftip);
     virtual void solveQP(Vec6 twist, Vec6 qPast, Vec6& qd_result, double dt) = 0;
 
@@ -58,7 +59,7 @@ protected:
 
 class Z1Model : public ArmModel{
 public:
-    Z1Model(Vec3 endPosLocal = Vec3::Zero(), double endEffectorMass = 0.0,
+    Z1Model(size_t armType = 36, Vec3 endPosLocal = Vec3::Zero(), double endEffectorMass = 0.0,
             Vec3 endEffectorCom = Vec3::Zero(), Mat3 endEffectorInertia = Mat3::Zero());
     ~Z1Model(){};
 
