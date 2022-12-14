@@ -7,6 +7,7 @@
 #include "control/CtrlComponents.h"
 #include "trajectory/SCurve.h"
 
+
 class JointSpaceTraj : public Trajectory{
 public:
     JointSpaceTraj(CtrlComponents *ctrlComp);
@@ -20,9 +21,13 @@ public:
     bool setJointTraj(Vec6 startQ, std::string endName, double speed);
     bool setJointTraj(std::string startName, std::string endName, double speed);
 private:
+    void _generateA345(double pathTime);
+
     SCurve _jointCurve;
     double ddQMax;
     double dddQMax;
+
+    double _a3, _a4, _a5, _s, _sDot;
 };
 
 #endif  // JOINTSPACETRAJ_H

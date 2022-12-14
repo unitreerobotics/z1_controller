@@ -30,11 +30,21 @@ protected:
     IOInterface *_ioInter;
     ArmModel *_armModel;
 
-    Vec6 _qPast, _qdPast, _q, _qd, _qdd, _tauf, _tauCmd, _g;
+    Vec6 _qPast, _qdPast, _q, _qd, _qdd, _tauForward;
     double _gripperPos, _gripperW, _gripperTau;
-    uint _collisionCnt;
 
     CtrlComponents *_ctrlComp;
+    Vec6 _g, _tauCmd;
+
+private:
+    void _tauFriction();
+
+    uint _collisionCnt;
+
+    Vec6 _mLinearFriction;
+    Vec6 _mCoulombFriction;
+    Vec6 _tauFric;
+
 };
 
 #endif  // FSMSTATE_H
