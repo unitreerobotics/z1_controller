@@ -7,7 +7,7 @@ import socket
 import struct
 
 def check_ip(ipAddr):
-    compile_ip = re.compile('192.168.123.1(\d{2})')
+    compile_ip = re.compile('(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))')
     if compile_ip.match(ipAddr):
         return True
     else:
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     pack_format = struct.Struct('6B')
 
     # 2. read IP address input
-    print("Please enter the IP address to set, which should be input as 192.168.123.1** ")
+    print("Please enter the IP address to set, which should be input as *.*.*.* ")
     ipAddr = ''
     while True:
         ipAddr = input("IP to set:   ")
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     ipset = re.split('\.', ipAddr)
     
     # 3. send udp socket to set IP address
-    send_data = [7, 1, 192, 168, 123, int(ipset[3])]
+    send_data = [7, 1, int(ipset[0]), int(ipset[1]), int(ipset[2]), int(ipset[3])]
     send_data = pack_format.pack(*send_data)
     server_socket.sendto(send_data, armAddr)
     data, client = server_socket.recvfrom(6)
