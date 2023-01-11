@@ -24,6 +24,7 @@ protected:
     void _armCtrl();
     void _recordData();
     Vec6 _postureToVec6(Posture posture);
+    void _tauFriction();
 
     LowlevelCmd *_lowCmd;
     LowlevelState *_lowState;
@@ -34,16 +35,14 @@ protected:
     double _gripperPos, _gripperW, _gripperTau;
 
     CtrlComponents *_ctrlComp;
-    Vec6 _g, _tauCmd;
+    Vec6 _g, _tauCmd, _tauFric;
 
 private:
-    void _tauFriction();
 
     uint _collisionCnt;
 
     Vec6 _mLinearFriction;
     Vec6 _mCoulombFriction;
-    Vec6 _tauFric;
 
 };
 

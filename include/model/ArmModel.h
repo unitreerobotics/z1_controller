@@ -66,11 +66,11 @@ public:
     bool checkInSingularity(Vec6 q);
     bool inverseKinematics(HomoMat TDes, Vec6 qPast, Vec6& q_result, bool checkInWorkSpace = false);
     void solveQP(Vec6 twist, Vec6 qPast, Vec6& qd_result, double dt);
+    double _theta2Bias;
 private:
     void setParam_V3_6();
-    void setParam_V3_7();//long
+    void setParam_V3_7();
     void setParam_V3_8();
-    double _theta2Bias;
 };
 
 #endif

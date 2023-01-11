@@ -12,8 +12,8 @@ public:
     void exit();
     int checkChange(int cmd);
 private:
-    double _oriSpeed = 0.4;// control by keyboard
-    double _posSpeed = 0.3;
+    double _oriSpeed = 0.3;// control by keyboard
+    double _posSpeed = 0.2;
     double oriSpeedLimit = 0.5;// limits in SDK
     double posSpeedLimit = 0.5;
     VecX _changeDirections;

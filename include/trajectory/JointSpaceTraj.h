@@ -24,8 +24,8 @@ private:
     void _generateA345(double pathTime);
 
     SCurve _jointCurve;
-    double ddQMax;
-    double dddQMax;
+    const double ddQMax = 15.0;
+    const double dddQMax = 30.0;
 
     double _a3, _a4, _a5, _s, _sDot;
 };

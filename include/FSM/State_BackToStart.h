@@ -16,6 +16,7 @@ public:
 private:
     bool _reach, _pastReach;
     JointSpaceTraj *_jointTraj;
+    Vec6 _pos_startFlat;
 };
 
 #endif  // STATE_BACKTOSTART_H

@@ -23,7 +23,7 @@ public:
     std::string armConfigPath;
     CmdPanel *cmdPanel;
     IOInterface *ioInter;
-    ArmModel *armModel;
+    Z1Model *armModel;
     CSVTool *stateCSV;
 
     SendCmd sendCmd; // cmd that receive from SDK 
@@ -43,8 +43,7 @@ public:
     void geneObj();
     void writeData();
 private:
-    void inputProcess(int argc, char** argv);
-    void configProcess();
+    void configProcess(int argc, char** argv);
 
     std::string ctrl_IP;
     uint ctrl_port;
