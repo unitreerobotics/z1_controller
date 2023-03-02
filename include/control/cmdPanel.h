@@ -72,10 +72,11 @@ public:
     void setValue(double value){_value = value;}
 private:
     double _value;
-    double _changeDirection;
+    double _changeDirection=0.0;
     double _dV = 0.0; //delta value per delta time
     double _dt = 0.0;
     double _dVdt = 0.0; // delta value per second
+    double _dVdtf = 0.0; // delta value per second after filter
     double _lim1, _lim2;
     bool _hasLim = false;
     bool _hasGoZero = false;

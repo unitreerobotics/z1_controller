@@ -19,12 +19,6 @@
 
 bool running = true;
 
-// over watch the ctrl+c command
-void ShutDown(int sig){
-    running = false;
-	std::cout << "[STATE] stop the controller" << std::endl;
-}
-
 //set real-time program
 void setProcessScheduler(){
     pid_t pid = getpid();
@@ -96,13 +90,12 @@ int main(int argc, char **argv){
     states.push_back(new State_ToState(ctrlComp));
     states.push_back(new State_Trajectory(ctrlComp));
     states.push_back(new State_Calibration(ctrlComp));
-    // states.push_back(new State_SetTraj(ctrlComp));
 
     FiniteStateMachine *fsm;
     fsm = new FiniteStateMachine(states, ctrlComp);
 
     ctrlComp->running = &running;
-    signal(SIGINT, ShutDown);
+    signal(SIGINT, [](int signum){running = false;});
     while(running){
         usleep(100000);
     }

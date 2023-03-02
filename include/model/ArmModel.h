@@ -26,10 +26,10 @@ public:
     std::vector<double> getJointQMin() {return _jointQMin;}
     std::vector<double> getJointSpeedMax() {return _jointSpeedMax;}
     void addLoad(double load);
+    bool checkAngle(Vec6 );
 
     const size_t dof = 6;
 protected:
-    bool _checkAngle(Vec6 );
     void _buildModel();
     // initial parameters
     HomoMat _M; //End posture at the home position

@@ -16,7 +16,7 @@ public:
     int checkChange(int cmd);
 protected:
     void _setTraj();
-    void _setTrajSDK();
+    
     TrajectoryManager *_traj;
     HomoMat _goalHomo;
     Vec6 _goalTwist;

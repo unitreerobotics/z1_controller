@@ -20,7 +20,7 @@ enum class ArmFSMState{
     TEACH,
     TEACHREPEAT,
     CALIBRATION,
-    SETTRAJ,
+    SETTRAJ,//no longer used
     BACKTOSTART,
     NEXT,
     LOWCMD

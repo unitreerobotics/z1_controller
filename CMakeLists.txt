@@ -52,15 +52,16 @@ if(SIMULATION)
 endif()
 
 set(EIGEN_PATH /usr/include/eigen3)
+find_package(Boost REQUIRED)
 include_directories(
     include
-    ${Boost_INCLUDE_DIR}
+    ${Boost_INCLUDE_DIRS}
     ${EIGEN_PATH}
 )
 
 link_directories(lib)
 
 # ----------------------add executable----------------------
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../build)                # EXECUTABLE:CMAKE_RUNTIME_OUTPUT_DIRECTORY
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(z1_ctrl main.cpp)
 target_link_libraries(z1_ctrl libZ1_${COMMUNICATION}_Linux64.so ${catkin_LIBRARIES} )
