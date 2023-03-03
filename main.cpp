@@ -15,7 +15,6 @@
 #include "FSM/State_TeachRepeat.h"
 #include "FSM/State_Trajectory.h"
 #include "FSM/State_LowCmd.h"
-#include "FSM/State_SetTraj.h"
 
 bool running = true;
 
