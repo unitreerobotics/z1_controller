@@ -48,7 +48,7 @@ int main(int argc, char **argv){
     ctrlComp->stateCSV = new CSVTool("../config/savedArmStates.csv");
     ctrlComp->geneObj();
     if(ctrlComp->ctrl == Control::SDK){
-        ctrlComp->cmdPanel = new ARMSDK(events, emptyAction, "127.0.0.1", 8072, 0.002);
+        ctrlComp->cmdPanel = new ARMSDK(events, emptyAction, "127.0.0.1", 8072, 8071, 0.002);
     }else if(ctrlComp->ctrl == Control::KEYBOARD){
         events.push_back(new StateAction("`", (int)ArmFSMStateName::BACKTOSTART));
         events.push_back(new StateAction("1", (int)ArmFSMStateName::PASSIVE));
