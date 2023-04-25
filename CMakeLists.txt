@@ -5,9 +5,10 @@ set(PACKAGE_NAME z1_controller)
 set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -O3")
 
 # ----------------------options----------------------
-set(COMMUNICATION UDP)            # UDP
+if (NOT COMMUNICATION)
+ set(COMMUNICATION UDP)            # UDP
 # set(COMMUNICATION ROS)          # ROS
-
+endif()
 
 # ----------------------configurations----------------------
 # COMMUNICATION

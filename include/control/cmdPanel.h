@@ -76,7 +76,7 @@ private:
     double _dV = 0.0; //delta value per delta time
     double _dt = 0.0;
     double _dVdt = 0.0; // delta value per second
-    double _dVdtf = 0.0; // delta value per second after filter
+    double _dVdtf = 0.0; // delta value per second after fliter
     double _lim1, _lim2;
     bool _hasLim = false;
     bool _hasGoZero = false;

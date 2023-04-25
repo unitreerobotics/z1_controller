@@ -16,7 +16,7 @@ private:
     double _posSpeed = 0.2;
     double oriSpeedLimit = 0.5;// limits in SDK
     double posSpeedLimit = 0.5;
-    VecX _changeDirections;
+    VecX _changeDirectionsf;
 
     Vec6 _twist;
     HomoMat _endHomoGoal, _endHomoPast, _endHomoDelta;
