@@ -11,5 +11,3 @@ docker build . -t bytelogics:z1_controller
 
 ## Run the docker instance
 docker run -ti --rm --network host -p 8071:8071 bytelogics:z1_controller
-
-once new shell connects, run `z1_ctrl`

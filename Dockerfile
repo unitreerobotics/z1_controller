@@ -11,3 +11,4 @@ ENV CMAKE_PREFIX_PATH=/opt/ros/noetic
 RUN bash -c 'cmake ..'
 RUN make
 
+CMD ./z1_ctrl
