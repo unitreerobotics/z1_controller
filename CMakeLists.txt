@@ -64,4 +64,4 @@ link_directories(lib)
 # ----------------------add executable----------------------
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(z1_ctrl main.cpp)
-target_link_libraries(z1_ctrl libZ1_${COMMUNICATION}_Linux64.so ${catkin_LIBRARIES} )
+target_link_libraries(z1_ctrl libZ1_${COMMUNICATION}_${CMAKE_HOST_SYSTEM_PROCESSOR}.so ${catkin_LIBRARIES} )
