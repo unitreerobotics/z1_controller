@@ -4,7 +4,7 @@
     <Port>8881</Port>
 
     <collision>
-        <open>N</open> <!-- Y or N -->
+        <open>Y</open> <!-- Y or N -->
         <limitT>10.0</limitT> <!-- N*M -->
         <load>0.0</load><!-- kg-->
     </collision>
