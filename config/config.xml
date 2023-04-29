@@ -5,7 +5,7 @@
 
     <collision>
         <open>Y</open> <!-- Y or N -->
-        <limitT>10.0</limitT> <!-- N*M -->
-        <load>0.0</load><!-- kg-->
+        <limitT>20.0</limitT> <!-- N*M -->
+        <load>0.02</load><!-- kg-->
     </collision>
 </configurartion>
