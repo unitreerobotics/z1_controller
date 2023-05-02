@@ -11,3 +11,6 @@ docker build . -t bytelogics:z1_controller
 
 ## Run the docker instance
 docker run -ti --rm --network host -p 8071:8071 bytelogics:z1_controller
+
+Cmake command you can do cmake .. -DCOMMUNICATION=ROS 
+then you dont need to edit the cmake.txt file
