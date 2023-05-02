@@ -7,7 +7,7 @@ documentation
 see [unitree-z1-docs](http://dev-z1.unitree.com)
 
 ## Build docker image
-docker build . -t bytelogics:z1_controller
+`docker build . -t bytelogics:z1_controller`
 
 ## Run the docker instance
 Make sure you are not in build folder but in the parent then run
