@@ -12,7 +12,11 @@ see [unitree-z1-docs](http://dev-z1.unitree.com)
 ## Run the docker instance
 Make sure you are not in build folder but in the parent then run
 
-`docker run -ti --rm --network host -p 8071:8071 bytelogics:z1_controller`
+`docker run -ti --rm --network host -p 8071:8071 bytelogics:z1_controller bash`
+`cmake .. -DCOMMUNICATION=ROS`
+`./z1_ctrl`
+you can try with 
+`./z1_ctrl k` for keyboard
 
 Cmake command you can do catkin_make -DCOMMUNICATION=ROS 
 then you dont need to edit the cmake.txt file
