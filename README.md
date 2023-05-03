@@ -14,6 +14,7 @@ Make sure you are not in build folder but in the parent then run
 
 `docker run -ti --rm --network host -p 8071:8071 bytelogics:z1_controller bash`
 `cmake .. -DCOMMUNICATION=ROS`
+`make`
 `./z1_ctrl`
 you can try with 
 `./z1_ctrl k` for keyboard
