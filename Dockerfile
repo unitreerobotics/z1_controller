@@ -8,7 +8,7 @@ WORKDIR data
 RUN mkdir build
 WORKDIR build
 ENV CMAKE_PREFIX_PATH=/opt/ros/noetic
-RUN bash -c 'cmake ..'
+RUN bash -c 'cmake .. -DCOMMUNICATION=ROS'
 RUN make
 
 CMD ./z1_ctrl

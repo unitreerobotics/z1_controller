@@ -10,4 +10,4 @@ see [unitree-z1-docs](http://dev-z1.unitree.com)
 docker build . -t bytelogics:z1_controller
 
 ## Run the docker instance
-docker run -ti --rm --network host -p 8071:8071 bytelogics:z1_controller
+docker run -ti --rm --network host bytelogics:z1_controller
