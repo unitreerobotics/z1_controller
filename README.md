@@ -7,9 +7,29 @@ documentation
 see [unitree-z1-docs](http://dev-z1.unitree.com)
 
 ## Build docker image
+```shell
 docker build . -t bytelogics:z1_controller
+```
 
 ## Run the docker instance
+For python connection:
+```shell
+docker run -ti --rm --network host bytelogics:z1_controller
+
+```
+
+For manual build within a docker:
+Make sure you are not in build folder but in the parent then run
+
+`docker run -ti --rm --network host bytelogics:z1_controller bash`
+`cmake .. -DCOMMUNICATION=ROS`
+`make`
+`./z1_ctrl`
+you can try with 
+`./z1_ctrl k` for keyboard
+
+Cmake command you can do catkin_make -DCOMMUNICATION=ROS 
+then you dont need to edit the cmake.txt file
 ## old docker run -ti --rm --network host --env="DISPLAY"  -e DISPLAY=${HOSTNAME}:0 --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"  --volume="/Users/keithsiilats/overlay_ws:/data/overlay_ws" --volume="/Users/keithsiilats/unitree_ws:/data/unitree_ws"  -p 8071:8071 -p 11311:11311 bytelogics:z1_controller bash
 docker run -ti --rm --network host    --env="DISPLAY=novnc:0.0" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"  --volume="/Users/keithsiilats/overlay_ws:/data/overlay_ws" --volume="/Users/keithsiilats/unitree_ws:/data/unitree_ws"  -p 8071:8071 -p 11311:11311 bytelogics:z1_controller bash
 docker run -d --rm --network host  --env="DISPLAY_WIDTH=3000" --env="DISPLAY_HEIGHT=1800" --env="RUN_XTERM=no" \
