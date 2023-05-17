@@ -8,4 +8,6 @@
         <limitT>10.0</limitT> <!-- N*M -->
         <load>0.0</load><!-- kg-->
     </collision>
+
+    <grasp_max_torque>10.0</grasp_max_torque>
 </configurartion>

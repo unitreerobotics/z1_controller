@@ -76,7 +76,7 @@ private:
     double _dV = 0.0; //delta value per delta time
     double _dt = 0.0;
     double _dVdt = 0.0; // delta value per second
-    double _dVdtf = 0.0; // delta value per second after filter
+    double _dVdtf = 0.0; // delta value per second after fliter
     double _lim1, _lim2;
     bool _hasLim = false;
     bool _hasGoZero = false;
@@ -104,6 +104,7 @@ public:
     virtual std::vector<std::vector<double> > stringToMatrix(std::string slogan);
     virtual SendCmd getSendCmd();
     virtual void setRecvState(RecvState& recvState){};
+    void start(){_runThread->start();}
 protected:
     virtual void _read() = 0;
     void _run();

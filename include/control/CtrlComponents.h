@@ -12,6 +12,7 @@
 #include "interface/IOUDP.h"
 #include "interface/IOROS.h"
 #include "control/armSDK.h"
+#include "model/unitree_gripper.h"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ public:
     IOInterface *ioInter;
     Z1Model *armModel;
     CSVTool *stateCSV;
+    std::shared_ptr<Unitree_Gripper> gripper;
 
     SendCmd sendCmd; // cmd that receive from SDK 
     RecvState recvState;// state that send to SDK

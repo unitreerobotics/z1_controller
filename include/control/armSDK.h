@@ -7,11 +7,12 @@
 class ARMSDK : public CmdPanel{
 public:
     ARMSDK(std::vector<KeyAction*> events, 
-        EmptyAction emptyAction, const char* IP, uint toport, uint ownport, double dt = 0.002);
+        EmptyAction emptyAction, const char* IP, uint port, double dt = 0.002);
     ~ARMSDK();
     SendCmd getSendCmd();
     int getState(size_t channelID = 0);
     void setRecvState(RecvState& recvState);
+    void start();
 private:
     void _sendRecv();
     void _read(){};
