@@ -2,7 +2,7 @@
 #define FILTER
 
 #include <vector>
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 
 /*
     Low pass filter

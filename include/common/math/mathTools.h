@@ -25,6 +25,15 @@ inline T min(const T val0, const Args... restVal){
     return val0 > (min<T>(restVal...)) ? val0 : min<T>(restVal...);
 }
 
+inline double clamp(const double& x, const double& low_value, const double& high_value) {
+    return (x > low_value) ? (x<high_value?x:high_value) : low_value;
+}
+
+inline double sign(const double& x, double threhold = 1e-6){
+    return std::fabs(x) < threhold ? 0 : ( x>0?1:-1 );
+}
+
+
 enum class TurnDirection{
     NOMATTER,
     POSITIVE,

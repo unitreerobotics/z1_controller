@@ -15,6 +15,7 @@
 #include "FSM/State_TeachRepeat.h"
 #include "FSM/State_Trajectory.h"
 #include "FSM/State_LowCmd.h"
+#include "IOROS.h"
 
 bool running = true;
 
@@ -39,10 +40,12 @@ int main(int argc, char **argv){
     std::vector<KeyAction*> events;
     CtrlComponents *ctrlComp = new CtrlComponents(argc, argv);
     
+    ros::init(argc, argv, "z1_controller");
+
     ctrlComp->dt = 1.0/250.;
     ctrlComp->armConfigPath =  "../config/";
     ctrlComp->stateCSV = new CSVTool("../config/savedArmStates.csv");
-    ctrlComp->ioInter = new IOUDP(ctrlComp->ctrl_IP.c_str(), ctrlComp->ctrl_port);
+    ctrlComp->ioInter = new IOROS();
     ctrlComp->geneObj();
     if(ctrlComp->ctrl == Control::SDK){
         ctrlComp->cmdPanel = new ARMSDK(events, emptyAction, "127.0.0.1", 8072, 0.002);
