@@ -104,6 +104,7 @@ public:
     virtual std::vector<std::vector<double> > stringToMatrix(std::string slogan);
     virtual SendCmd getSendCmd();
     virtual void setRecvState(RecvState& recvState){};
+    void start(){_runThread->start();}
 protected:
     virtual void _read() = 0;
     void _run();

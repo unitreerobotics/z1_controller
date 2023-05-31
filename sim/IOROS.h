@@ -1,5 +1,3 @@
-#ifdef COMPILE_WITH_SIMULATION
-
 #ifndef IOROS_H
 #define IOROS_H
 
@@ -34,5 +32,3 @@ private:
 };
 
 #endif  // IOROS_H
-
-#endif  // COMPILE_WITH_SIMULATION

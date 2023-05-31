@@ -8,6 +8,7 @@
 #include "common/math/mathTools.h"
 #include "common/utilities/timer.h"
 #include "FSM/BaseState.h"
+#include "model/unitree_gripper.h"
 
 class FSMState : public BaseState{
 public:
@@ -25,11 +26,13 @@ protected:
     void _recordData();
     Vec6 _postureToVec6(Posture posture);
     void _tauFriction();
+    void _zero_position_joint4_protection();
 
     LowlevelCmd *_lowCmd;
     LowlevelState *_lowState;
     IOInterface *_ioInter;
     ArmModel *_armModel;
+    std::shared_ptr<Unitree_Gripper> _gripper;
 
     Vec6 _qPast, _qdPast, _q, _qd, _qdd, _tauForward;
     double _gripperPos, _gripperW, _gripperTau;

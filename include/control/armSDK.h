@@ -12,6 +12,7 @@ public:
     SendCmd getSendCmd();
     int getState(size_t channelID = 0);
     void setRecvState(RecvState& recvState);
+    void start();
 private:
     void _sendRecv();
     void _read(){};

@@ -10,8 +10,8 @@
 #include "common/utilities/CSVTool.h"
 #include "model/ArmModel.h"
 #include "interface/IOUDP.h"
-#include "interface/IOROS.h"
 #include "control/armSDK.h"
+#include "model/unitree_gripper.h"
 
 using namespace std;
 
@@ -25,6 +25,8 @@ public:
     IOInterface *ioInter;
     Z1Model *armModel;
     CSVTool *stateCSV;
+    std::shared_ptr<Unitree_Gripper> gripper;
+    double gripper_max_tau = 10;
 
     SendCmd sendCmd; // cmd that receive from SDK 
     RecvState recvState;// state that send to SDK
@@ -39,14 +41,14 @@ public:
     bool isPlot;
     int trajChoose = 1;
     size_t armType = 36;
-
+    std::string ctrl_IP;
+    uint ctrl_port;
+    
     void geneObj();
     void writeData();
 private:
     void configProcess(int argc, char** argv);
 
-    std::string ctrl_IP;
-    uint ctrl_port;
     double _loadWeight;
 };
 
