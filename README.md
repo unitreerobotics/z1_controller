@@ -20,7 +20,7 @@ docker run -ti --rm --network host bytelogics:z1_controller
 
 For manual build within a docker:
 Make sure you are not in build folder but in the parent then run
-
+docker run -it --net=host --env="ROS_MASTER_URI=http://host.docker.internal:11311" bytelogics:z1_controller bash
 `docker run -ti --rm --network host bytelogics:z1_controller bash`
 `cmake .. -DCOMMUNICATION=ROS`
 `make`
@@ -40,3 +40,24 @@ https://gist.github.com/cschiewek/246a244ba23da8b9f0e7b11a68bf3285
 cd /data/unitree_ws
 source devel/setup.bash
 roslaunch unitree_gazebo z1.launch
+
+## macos v2 
+brew install --cask mambaforge
+mamba create -n ros_env
+mamba init
+mamba activate ros_env
+conda config --env --add channels robostack-staging
+mamba install ros-noetic-desktop-full
+mamba install compilers cmake pkg-config make ninja colcon-common-extensions catkin_tools
+./prepare_unitree_ws.sh
+cd unitree_ws
+rm -Rf src/unitree_controller
+rm -Rf src/z1_controller
+rm -Rf src/unitree_legged_control
+
+catkin_make
+source devel/setup.bash 
+roslaunch unitree_gazebo z1_empty.launch
+# go to dockcker and run
+# roslaunch unitree_gazebo z1_spawn.launch
+
