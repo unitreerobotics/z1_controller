@@ -1,2 +1,6 @@
 .vscode
+/build
+/cmake-build*
+.idea
 build
+unitree_ws
