@@ -53,7 +53,7 @@ public:
     double getGripperTauFiltered();
 private:
     size_t _dof = 6;
-    int temporatureLimit = 80.0;// centigrade
+    int temporatureLimit = 80;// centigrade
     std::vector<int> _isMotorConnectedCnt;
     std::vector<bool> _isMotorLostConnection;
 };

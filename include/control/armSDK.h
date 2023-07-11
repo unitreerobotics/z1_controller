@@ -7,7 +7,7 @@
 class ARMSDK : public CmdPanel{
 public:
     ARMSDK(std::vector<KeyAction*> events, 
-        EmptyAction emptyAction, const char* IP, uint port, double dt = 0.002);
+        EmptyAction emptyAction, const char* sdkIP, uint sdkPort, uint ownPort, double dt = 0.002);
     ~ARMSDK();
     SendCmd getSendCmd();
     int getState(size_t channelID = 0);

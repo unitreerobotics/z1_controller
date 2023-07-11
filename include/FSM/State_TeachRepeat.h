@@ -18,7 +18,6 @@ private:
     bool _reachedStart = false;
     bool _finishedRepeat = false;
     size_t _index = 0;
-    size_t _indexPast;
     Vec6 _trajStartQ, _trajStartQd;
     double _trajStartGripperQ, _trajStartGripperQd;
 
