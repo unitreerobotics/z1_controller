@@ -13,6 +13,7 @@ public:
     bool sendRecv(const LowlevelCmd *cmd, LowlevelState *state);
 private:
     ros::NodeHandle _nm;
+    std::string _rname; // robot_name retrieved from ROS parameter server
     ros::Subscriber _servo_sub[7];
     ros::Publisher _servo_pub[7];
     unitree_legged_msgs::MotorState _joint_state[7];
